@@ -732,68 +732,9 @@ class Items():
 			else:
 				pass
 		return pl
-	
-	def useEnemyItem(self, idSlot, e): # e - enemy
-		for item in self.itemsList:
-			if(e[2][idSlot][0] == item[0]):
-				if(e[2][idSlot][3] > 0):
-					# ARMOR
-					if(e[2][idSlot][2] == 1):
-						if(e[2][idSlot][4] == 1): # Not equiped
-							for equipment in self.equipmentListInfo:
-								if(equipment[0] == e[2][idSlot][0]):
-									enemyH.changeStats(equipment[1], -equipment[2], e)	
-									e[3][equipment[3]] = -1
-									break
-							e[2][idSlot][4] = 0
-							break
-						if(e[2][idSlot][4] == 0): # Equiped
-							for equipment in self.equipmentListInfo:
-								if(equipment[0] == e[2][idSlot][0]):
-									if e[3][equipment[3]] == -1:
-										e[2][idSlot][4] = 1
-										e[3][equipment[3]] = e[2][idSlot][0]
-										enemyH.changeStats(equipment[1], equipment[2], e)
-									else:
-										pass
-										# print("Вы уже носите другую броню, сначала снимите ее")
-									break
-							break
-					
-					# WEAPON
-					elif(e[2][idSlot][2] == 2):
-						if(e[2][idSlot][4] == 1): # Equiped
-							for equipment in self.equipmentListInfo:
-								if(equipment[0] == e[2][idSlot][0]):
-									if e[3][0] == e[2][idSlot][0]:
-										e[3][0] = -1
-										enemyH.changeStats(equipment[1], -equipment[2], e)
-										break
-									elif e[3][1] == e[2][idSlot][0]:
-										e[3][1] = -1
-										enemyH.changeStats(equipment[1], -equipment[2], e)
-										break
-							e[2][idSlot][4] = 0
-							break
-						elif(e[2][idSlot][4] == 0): # Not equiped
-							for equipment in self.equipmentListInfo:
-								if(equipment[0] == e[2][idSlot][0]):
-									if e[3][0] == -1:
-										e[3][0] = e[2][idSlot][0]
-										enemyH.changeStats(equipment[1], equipment[2], e)
-										break
-									elif e[3][1] == -1:
-										e[3][1] = e[2][idSlot][0]
-										enemyH.changeStats(equipment[1], equipment[2], e)
-										break
-									else:
-										pass
-										# print("Вы уже носите другое оружие, сначала снимите его")
-									break
-							e[2][idSlot][4] = 1
-							break
 
-	def addItemToInv(self, mob, iD, count, mobType):
+	def addItemToInv(self, mob, iD, count):
+			mobType = 0
 			arldyHave = False
 			if mobType == 0: # If player
 				print("Получен {} в ".format(self.getItem(iD)[1]) + str(len(mob.inv)) + " слот (в количестве: {})".format(count))
