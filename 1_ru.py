@@ -93,7 +93,7 @@ class Map1():
 				print("{}) {}".format(dec[1], dec[2]))
 		input()
 
-	def move(self, pl, currLoc, direction, enemies):
+	def move(self, pl, currLoc, direction):
 		minX = currLoc[2]
 		maxX = currLoc[4]
 		minY = currLoc[3]
@@ -463,7 +463,7 @@ class Items():
 								if i[0] != -1: print("{}) {} (В количестве {} штук)".format(i[0], i[1], item[1]))
 							print("Введите номер предмета или 'взять всё'")
 							b = input().upper()
-							if re.search('ВЗЯТЬ ВСЁ', b):
+							if re.search('ВЗЯТЬ ВСЁ', b) or re.search('ВЗЯТЬ ВСЕ', b):
 								if b != "":
 									for item in dec[4]:
 										items.addItemToInv(pl, item[0], item[1])
@@ -494,7 +494,7 @@ class Items():
 									if i[0] != -1: print("{}) {} (В количестве {} штук)".format(i[0], i[1], item[1]))
 								print("Введите номер предмета или 'взять всё'")
 								b = input().upper()
-								if re.search('ВЗЯТЬ ВСЁ', b):
+								if re.search('ВЗЯТЬ ВСЁ', b) or re.search('ВЗЯТЬ ВСЕ', b):
 									if b != "":
 										for item in dec[4]:
 											items.addItemToInv(pl, item[0], item[1])
@@ -514,7 +514,7 @@ class Items():
 								print(dec[2] + " пуст")
 								input()
 						else:
-							print("Неверный пароль")
+							print("Неверный парол	ь")
 							input()
 					if dec[3] == 2:
 						if pl.checkItem(dec[5]) == True:
@@ -524,7 +524,7 @@ class Items():
 									if i[0] != -1: print("{}) {} (В количестве {} штук)".format(i[0], i[1], item[1]))
 								print("Введите номер предмета или 'взять всё'")
 								b = input().upper()
-								if re.search('ВЗЯТЬ ВСЁ', b):
+								if re.search('ВЗЯТЬ ВСЁ', b) or re.search('ВЗЯТЬ ВСЕ', b):
 									if b != "":
 										for item in dec[4]:
 											items.addItemToInv(pl, item[0], item[1])
@@ -1410,18 +1410,18 @@ class UI():
 				items.getInvDec(int(b), pl, loc)
 		if re.search('ИДТИ В', b):
 			b = b.replace(" ", "")
-			map1.move(pl, loc, b[5:], enemies)
+			map1.move(pl, loc, b[5:])
 		if re.search("ИДТИВ", b):
 			b = b.replace(" ", "")
-			map1.move(pl, loc, b[4:], enemies)
-		if re.search('ВНИЗ', b):
+			map1.move(pl, loc, b[4:])
+		if re.search('ВНИЗ', b) or re.search('D', b):
 			map1.move(pl, loc, 'down')
-		if re.search('ВПРАВО', b):
-			map1.move(pl, loc, 'right', enemies)
-		if re.search('ВЛЕВО', b):
-			map1.move(pl, loc, 'left', enemies)
-		if re.search('ВВЕРХ', b):
-			map1.move(pl, loc, 'up', enemies)
+		if re.search('ВПРАВО', b) or re.search('R', b):
+			map1.move(pl, loc, 'right',)
+		if re.search('ВЛЕВО', b) or re.search('L', b):
+			map1.move(pl, loc, 'left')
+		if re.search('ВВЕРХ', b) or re.search('U', b):
+			map1.move(pl, loc, 'up')
 		if re.search('АТАКОВАТЬ', b) or re.search('АТК', b):
 			for l in self.letters:
 				b = b.replace(l, "")
